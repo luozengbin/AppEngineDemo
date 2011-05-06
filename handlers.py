@@ -7,18 +7,6 @@ import settings
 from contextIO.ContextIO import ContextIO, IMAPAdmin
 from django.utils import simplejson
 
-class FileRevisionsHandler(webapp.RequestHandler):
-    def get(self):
-        current_user = users.get_current_user()
-        current_email = current_user.email()
-
-        fileId = self.request.get('fileid')
-        contextIO = ContextIO(api_key=settings.CONTEXTIO_OAUTH_KEY,
-                              api_secret=settings.CONTEXTIO_OAUTH_SECRET,
-                              api_url=settings.CONTEXTIO_API_URL)
-        response = contextIO.filerevisions(fileId,account=current_email)
-        self.response.out.write(simplejson.dumps(response.get_data()))
-
 class FilesHandler(webapp.RequestHandler):
     def get(self):
         current_user = users.get_current_user()
@@ -56,8 +44,7 @@ class SearchHandler(webapp.RequestHandler):
         self.response.out.write(simplejson.dumps(response.get_data()))
 
 def main():
-    application = webapp.WSGIApplication([('/filerevisions.json', FileRevisionsHandler),
-                                          ('/files.json', FilesHandler),
+    application = webapp.WSGIApplication([('/files.json', FilesHandler),
                                           ('/messages.json', MessagesHandler),
                                           ('/search.json', SearchHandler)], debug=True)
     util.run_wsgi_app(application)
