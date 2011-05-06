@@ -1,0 +1,378 @@
+/* @override 
+	http://localhost:8081/css/app.css
+	http://contextio-demo.appspot.com/css/app.css
+*/
+
+p, td, li, a, div, span {
+	font-family: Helvetica, sans-serif;
+}
+
+#header {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 30px;
+	padding: 0px 10px;
+	background-color: #444;
+	color: #fff;
+}
+
+#header span {
+	display: inline-block;
+	padding: 6px 5px;	
+	color: #fff;
+}
+
+#header a {
+	font-size: 12px;
+	float: right;
+	padding: 6px 5px;	
+	color: #fff;
+}
+
+#sidebar {
+	position: absolute;
+	top: 30px;
+	bottom: 0px;
+	left: 0px;
+	width: 330px;
+	padding: 0px;
+	display: -moz-box;
+	display: -webkit-box;
+	-moz-box-orient: vertical;
+	-webkit-box-orient: vertical;
+	border-right: 1px solid #bbb;
+}
+
+#searchBox {
+	padding: 8px 5px;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#647080), to(#2f363f));
+	background: -moz-linear-gradient(top, #647080, #2f363f);
+	text-align: center;
+}
+
+#searchBox .icon {
+	background: url('/images/input-search.png') no-repeat center center;
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	vertical-align: middle;
+	padding-right: 8px;
+}
+
+#searchBox input {
+	width: 80%;
+	display: inline-block;
+	vertical-align: middle;
+	padding: 3px 2px 2px;
+}
+
+#searchResultsCtnr {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	background-color: #f4f7f9;
+	overflow: auto;
+}
+
+#searchResultsCtnr .noResults, .contentListCtnr .noResults {
+	text-align: center;
+	padding: 20px 12px;
+	font-size: 14px;
+	color: #999;
+}
+
+.searchResult {
+	display: block;
+	font-size: 12px;
+	padding: 0px 5px 0px 0px;
+	height: 50px;
+	background-color: #e6e9ed;
+	border-bottom: 1px solid #bdc4cd;
+	border-top: 1px solid #fff;
+	cursor: pointer;
+}
+
+.searchResult.selected {
+	background-color: #fff;
+}
+
+.searchResult:hover {
+	background-color: #fcfdff;
+}
+
+.searchResult .thumbnail {
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 12px;
+	background-color: rgba(0,0,0,0.1);
+}
+
+.searchResult .thumbnail img {
+	width: inherit;
+	height: inherit;
+}
+
+.searchResult .displayName {
+	display: block;
+	font-size: 16px;
+	margin-top: 6px;
+	color: #333;
+}
+
+.searchResult .email {
+	display: block;
+	font-size: 12px;
+	margin-top: 4px;
+	color: #58697f;
+}
+
+#contentDisplay {
+	position: absolute;
+	top: 30px;
+	bottom: 0px;
+	right: 0px;
+	left: 331px;
+	overflow: hidden;
+	background-color: #f5f5f5;
+}
+
+#contentDisplay .noSelection {
+	text-align: center;
+}
+
+#contentDisplay .noSelection p {
+	width: 400px;
+	margin: 150px auto;
+	font-size: 18px;
+	line-height: 1.5em;
+	color: #888;
+	text-shadow: #fff 0px 2px 0px;
+}
+
+#contentDisplay .hasSelection {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	display: -moz-box;
+	display: -webkit-box;
+	-moz-box-orient: vertical;
+	-webkit-box-orient: vertical;
+}
+
+#contentDisplay .messageElm, #contentDisplay .fileElm  {
+	display: block;
+	background-color: #fff;
+	border-bottom: 1px solid #bbb;
+	padding: 6px 16px;
+}
+
+/* @group message Elm */
+
+.messageElm .title {
+	margin: 6px 0px;
+}
+
+.messageElm .title .date {
+	float: right;
+	font-size: 12px;
+	color: #777;
+}
+
+.messageElm .subject {
+	font-size: 16px;
+}
+
+.messageElm .people > div {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 1.4em;
+}
+
+.messageElm .people .label {
+	display: block;
+	font-size: 12px;
+	color: #666;
+	margin: 0.4em 0px;
+	border-bottom: 1px solid #ccc;
+}
+
+/* @end */
+
+/* @group fileElm */
+
+.fileElm .name {
+	font-size: 16px;
+	display: block;
+	margin: 0.5em 0px;
+}
+
+.fileElm table.occurrences {
+	margin: 0.5em 0px;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.fileElm table.occurrences th {
+	margin: 0px;
+	padding: 4px;
+	text-align: left;
+	font-size: 12px;
+	color: #666;
+	border-bottom: 1px solid #888;
+	font-weight: normal;
+}
+
+.fileElm table.occurrences td {
+	margin: 0px;
+	padding: 4px;
+	text-align: left;
+	font-size: 11px;
+	color: #666;
+	border-bottom: 1px solid #ccc;
+	font-weight: normal;
+	background-color: #f5f5f5;
+}
+
+/* @end */
+
+/* @group person */
+
+#contentDisplay .person {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+#contentDisplay .person .thumbnail {
+	display: inline-block;
+	vertical-align: middle;
+	width: 35px;
+	height: 35px;
+	margin-right: 8px;
+}
+
+#contentDisplay .person .thumbnail img {
+	width: inherit;
+	height: inherit;
+}
+
+#contentDisplay .person .info {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#contentDisplay .person .displayName {
+	display: block;
+	font-size: 12px;
+	margin-top: 2px;
+	color: #333;
+}
+
+#contentDisplay .person .email {
+	display: block;
+	font-size: 11px;
+	margin-top: 2px;
+	color: #58697f;
+}
+
+#contentDisplay .actions {
+	margin: 0.5em 0px;
+}
+
+#contentDisplay .actions a {
+	font-size: 12px;
+	margin-right: 1em;
+}
+
+/* @end */
+
+#contentNav {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#333));
+	background: -moz-linear-gradient(top, #777, #333);
+	text-align: center;
+}
+
+.contentListCtnr {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	overflow: auto;
+}
+
+#contentNav li {
+	display: inline-block;
+	padding: 4px 1em;
+	margin: 9px 4px;
+	vertical-align: middle;
+	color: #fff;
+	font-size: 14px;
+	border-radius: 14px;
+	-webkit-border-radius: 14px;
+	-moz-border-radius: 14px;
+	text-shadow: #000 0px 1px 0px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#contentNav li:hover {
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#444));
+	background: -moz-linear-gradient(top, #777, #444);
+	-webkit-box-shadow:  rgba(0,0,0,0.5) 0px 1px 4px;
+	-moz-box-shadow:  rgba(0,0,0,0.5) 0px 1px 4px;
+}
+
+#contentNav li.selected {
+	background-color: #333;
+	-webkit-box-shadow: inset #000 0px 1px 5px;
+	-moz-box-shadow: inset #000 0px 1px 5px;
+}
+
+#contentNav li.selected:hover {
+	background: #333;
+}
+
+body.connect {
+	background-color: #f5f5f5;
+	text-align: center;
+}
+
+body.connect p {
+	width: 400px;
+	margin: 150px auto 50px;
+	font-size: 18px;
+	line-height: 1.5em;
+	color: #888;
+	text-shadow: #fff 0px 2px 0px;
+}
+
+body.connect a {
+	margin: 2em auto;
+	font-size: 18px;
+	padding: 1em 2em;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	border: 1px solid #555a61;
+	background-color: #647080;
+	color: #fff;
+	text-shadow: #333 1px 1px 0px;
+	text-decoration: none;
+	-webkit-box-shadow: rgba(0,0,0,0.5) 0px 2px 5px;
+}
+
+body.connect a:hover {
+	background-color: #778699;
+}
+
+.clearfix:after {
+	content: '.';
+	display: block;
+	height: 0px;
+	clear: both;
+	visibility: hidden;
+}

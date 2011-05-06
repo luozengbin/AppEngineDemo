@@ -1,0 +1,34 @@
+application: contextio-demo
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /
+  script: main.py
+  login: required
+
+- url: /.*\.json
+  script: handlers.py
+  login: required
+
+- url: /imapoauth_.*
+  script: imapoauth.py
+
+- url: /images
+  static_dir: static/images
+
+- url: /css
+  static_dir: static/css
+
+- url: /js
+  static_dir: static/js
+
+- url: /((.*).ico)
+  static_files: static/\1
+  upload: static/((.*).ico)
+
+- url: /(google(.*).html)
+  static_files: site-verif/\1
+  upload: site-verif/(google(.*).html)
+
