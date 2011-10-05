@@ -117,16 +117,16 @@ function search(searchStr) {
 				console.log('search results: ', results);
 				// empty results container and append the new ones
 				ctnr.empty();
-				var max = results.matches.length;
+				var max = results.length;
 				if (max == 0) {
 					ctnr.append('<p class="noResults">No results found.</p>');
 				} else {
 					for (var i = 0; i < max; ++i) {
-						var fullName = (typeof results.matches[i].name == 'undefined') ? '-': results.matches[i].name;
+						var fullName = (typeof results[i].name == 'undefined') ? '-': results[i].name;
 						ctnr.append($("<div/>", {
 							'class': 'searchResult',
-							'html': '<span class="thumbnail"><img src="'+results.matches[i].thumbnail+'" /></span><span class="displayName">'+results.matches[i].name+'</span><span class="email">'+results.matches[i].emails[0]+'</span>',
-							'data-email': results.matches[i].emails[0]
+							'html': '<span class="thumbnail"><img src="'+results[i].thumbnail+'" /></span><span class="displayName">'+results[i].name+'</span><span class="email">'+results[i].email+'</span>',
+							'data-email': results[i].email
 						}));
 					}
 				}
@@ -141,37 +141,22 @@ function showFiles(email) {
 
 	$('#messageListCtnr').hide();
 	var ctnr = $('#attachmentListCtnr');
+	var tbody = $('#attachmentListCtnr').find('tbody');
 	ctnr.show().css({opacity:'0.5'});
 
 	$.getJSON('/files.json',{email: email}, function (results) {
 		console.dir(results);
-		ctnr.empty();
-		var tmplElm = $('#tmpl-fileElm > div');
+		tbody.empty();
 		var max = results.length;
 		if (max == 0) {
-			ctnr.append('<p class="noResults">No results found.</p>');
+			tbody.append('<tr><td colspan="4">No results found.</td></tr>');
 		} else {
 			for (var i = 0; i < max; ++i) {
-				var elm = tmplElm.clone(false);
-				
-				elm.find('.name').text(results[i].fileName);
-				
-				var tbodyElm = elm.find("table tbody");
-				for (var j = 0; j < results[i].occurrences.length; ++j) {
-					var occ = results[i].occurrences[j];
-					var rowElm = $("<tr/>")
-						.append($("<td/>",{'text':occ.fileName}))
-						.append($("<td/>",{'html':buildPersonElm(occ.addresses.from, occ.personInfo[occ.addresses.from.email])}))
-						.append($("<td/>").append(buildActionElm(occ.subject)))
-						.append($("<td/>",{'class':'actions'}).append(buildActionElm("download")).append(buildActionElm("preview")))
-						.data('fileId',occ.fileId).appendTo(tbodyElm);
-				}
-				elm.addClass('fileElm').appendTo(ctnr);
-				var fRow = tbodyElm.find('tr:eq(0)');
-				fRow.find("td:eq(0)").css('width',"30%");
-				fRow.find("td:eq(1)").css('width',"30%");
-				fRow.find("td:eq(2)").css('width',"25%");
-				fRow.find("td:eq(3)").css('width',"15%");
+				var elm = $("<tr/>", {'class':'fileElm'}).appendTo(tbody);
+				$("<td/>", {'class':'name', 'text': results[i].file_name}).appendTo(elm);
+				$("<td/>", {'class':'from'}).append(buildPersonElm(results[i].addresses.from, results[i].person_info[results[i].addresses.from.email])).appendTo(elm);
+				$("<td/>", {'class':'subject', 'text': results[i].subject}).appendTo(elm);
+				$("<td/>", {'class':'actions'}).append(buildActionElm("download")).append(buildActionElm("preview")).appendTo(elm);
 			}
 		}
 		ctnr.animate({opacity:'1'});
@@ -194,32 +179,31 @@ function showMessages(email) {
 			
 			elm.find('.subject').text(results[i].subject);			
 			elm.find('.date').text(dateToLocaleFormat(new Date(results[i].date * 1000), "%b %e, %Y"));
-
-			elm.find('.from .address').append(buildPersonElm(results[i].addresses.from, results[i].personInfo[results[i].addresses.from.email]));
+			elm.find('.from .address').append(buildPersonElm(results[i].addresses.from, results[i].person_info[results[i].addresses.from.email]));
 			
 			for (var j = 0; j < results[i].addresses.to.length; ++j) {
-				elm.find('.to .address').append(buildPersonElm(results[i].addresses.to[j], results[i].personInfo[results[i].addresses.to[j].email]));
+				elm.find('.to .address').append(buildPersonElm(results[i].addresses.to[j], results[i].person_info[results[i].addresses.to[j].email]));
 			}
 			
 			if ('cc' in results[i]) {
 				for (var j = 0; j < results[i].addresses.cc.length; ++j) {
-					elm.find('.cc .address').append(buildPersonElm(results[i].addresses.cc[j], results[i].personInfo[results[i].addresses.cc[j].email]));
+					elm.find('.cc .address').append(buildPersonElm(results[i].addresses.cc[j], results[i].person_info[results[i].addresses.cc[j].email]));
 				}
 			} else {
 				elm.find('.cc').hide();
 			}
 			
-			elm.addClass('messageElm').data('emailMessageId',results[i].emailMessageId).appendTo(ctnr);
+			elm.addClass('messageElm').data('emailMessageId',results[i].email_message_id).appendTo(ctnr);
 		}
 		ctnr.animate({opacity:'1'});
 	});
 };
 
 
-function buildPersonElm(addr, personInfo) {
+function buildPersonElm(addr, person_info) {
 	return $("<span/>",{
 		'class': 'person',
-		'html': '<span class="thumbnail"><img src="'+personInfo.thumbnail+'" /></span><span class="info"><span class="displayName">'+addr.name+'</span><span class="email">'+addr.email+'</span></span>'
+		'html': '<span class="thumbnail"><img src="'+person_info.thumbnail+'" /></span><span class="info"><span class="displayName">'+addr.name+'</span><span class="email">'+addr.email+'</span></span>'
 	});
 };
 

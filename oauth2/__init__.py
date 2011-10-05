@@ -670,12 +670,13 @@ class Client(httplib2.Http):
 
         realm = schema + ':' + hierpart + host
 
-        if is_form_encoded:
+        """if is_form_encoded:
             body = req.to_postdata()
         elif method == "GET":
             uri = req.to_url()
         else:
-            headers.update(req.to_header(realm=realm))
+            headers.update(req.to_header(realm=realm))"""
+        headers.update(req.to_header(realm=realm))
 
         return httplib2.Http.request(self, uri, method=method, body=body,
             headers=headers, redirections=redirections,

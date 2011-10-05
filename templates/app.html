@@ -27,7 +27,19 @@
 					<li rel="attachments">attachments</li>
 				</ul>
 				<div id="messageListCtnr" class="contentListCtnr"></div>
-				<div id="attachmentListCtnr" class="contentListCtnr" style="display: none"></div>
+				<div id="attachmentListCtnr" class="contentListCtnr" style="display: none">
+					<table>
+						<thead>
+							<tr>
+								<th>file name</th>
+								<th>from</th>
+								<th>email subject</th>
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div style="display: none;">
@@ -55,22 +67,6 @@
 						<a href="javascript:void(null);" rel="body">open message</a>
 						<a href="javascript:void(null);" rel="thread">show full thread</a>
 					</div>
-				</div>
-			</div>
-			<div id="tmpl-fileElm">
-				<div>
-					<span class="name"></span>
-					<table class="occurrences">
-						<thead>
-							<tr>
-								<th>file name</th>
-								<th>from</th>
-								<th>email subject</th>
-								<th>actions</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
 				</div>
 			</div>
 		</div>

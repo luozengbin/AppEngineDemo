@@ -163,11 +163,15 @@ p, td, li, a, div, span {
 	-webkit-box-orient: vertical;
 }
 
-#contentDisplay .messageElm, #contentDisplay .fileElm  {
+#contentDisplay .messageElm {
 	display: block;
 	background-color: #fff;
 	border-bottom: 1px solid #bbb;
 	padding: 6px 16px;
+}
+
+#contentDisplay .fileElm  {
+	border-bottom: 1px solid #bbb;
 }
 
 /* @group message Elm */
@@ -206,17 +210,16 @@ p, td, li, a, div, span {
 
 .fileElm .name {
 	font-size: 16px;
-	display: block;
 	margin: 0.5em 0px;
 }
 
-.fileElm table.occurrences {
+#attachmentListCtnr table {
 	margin: 0.5em 0px;
 	border-collapse: collapse;
 	width: 100%;
 }
 
-.fileElm table.occurrences th {
+#attachmentListCtnr table th {
 	margin: 0px;
 	padding: 4px;
 	text-align: left;
@@ -226,7 +229,7 @@ p, td, li, a, div, span {
 	font-weight: normal;
 }
 
-.fileElm table.occurrences td {
+#attachmentListCtnr table td {
 	margin: 0px;
 	padding: 4px;
 	text-align: left;

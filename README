@@ -2,3 +2,8 @@ This application shows how you can use Context.IO to build applications
 that leverage email data within Google App Engine. 
 
 A working demo is avaialble at: http://contextio-demo.appspot.com
+
+This demo has been updated to use Context.IO 2.0 currently in public beta.
+http://context.io/docs/2.0
+
+The library contextIO2 used is still under development and some calls supported by the API aren't yet implemented in it. An official and complete version is coming.

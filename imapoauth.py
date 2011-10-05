@@ -21,7 +21,7 @@ from google.appengine.api import users
 import gdata.gauth
 import gdata.docs.client
 import settings
-from contextIO.ContextIO import ContextIO, IMAPAdmin
+from contextIO2 import ContextIO, Account
 from django.utils import simplejson
 
 # Create an instance of the DocsService to make API calls
@@ -88,26 +88,19 @@ class RequestTokenCallback(webapp.RequestHandler):
 
         # Now that we have a long-lived access token giving us access to
         # the user's mailbox, the last step is to add the mailbox in our
-        # Context.IO account. This is done using the /imap/addaccount API
-        # call and by passing the access token and the consumer key used
-        # to obtain that token.
+        # Context.IO account. 
         #
-        # For this to work, the Google Consumer key and secret used to obtain
+        # For this to work, the Google consumer key and secret used to obtain
         # access tokens must be configured in your Context.IO account. See:
-        # https://console.context.io/#settings
-        contextIO = IMAPAdmin(api_key=settings.CONTEXTIO_OAUTH_KEY,
-                              api_secret=settings.CONTEXTIO_OAUTH_SECRET,
-                              api_url=settings.CONTEXTIO_API_URL)
-        info = contextIO.add_account(current_user.email(),
-                current_user.email(),
-                firstname=current_user.nickname(),
-                server='imap.gmail.com',
-                usessl=True,
-                port=993,
-                oauthtoken=gdocs.auth_token.token,
-                oauthtokensecret=gdocs.auth_token.token_secret,
-                oauthconsumername=settings.APPENGINE_CONSUMER_KEY
-            ).get_data()
+        # https://console.context.io/#settings/imapoauth
+        ctxIO = ContextIO(consumer_key=settings.CONTEXTIO_OAUTH_KEY, consumer_secret=settings.CONTEXTIO_OAUTH_SECRET)
+        newAccount = ctxIO.post_account(email=current_user.email(), first_name=current_user.nickname())
+        newSource = newAccount.post_source(email=current_user.email(),
+                                           username=current_user.email(),
+                                           server='imap.gmail.com',
+                                           provider_token=gdocs.auth_token.token,
+                                           provider_token_secret=gdocs.auth_token.token_secret,
+                                           provider_consumer_key=settings.APPENGINE_CONSUMER_KEY)
 
         # OPTIONAL:
         # If we want to keep the access token in our application persistent
