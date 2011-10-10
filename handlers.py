@@ -55,8 +55,7 @@ def validateUser(cookies, authEmail):
 def main():
     # make sure the account id is available from a cookie and matches the
     # authentified user.
-    application = webapp.WSGIApplication([('/filerevisions.json', FileRevisionsHandler),
-                                          ('/files.json', FilesHandler),
+    application = webapp.WSGIApplication([('/files.json', FilesHandler),
                                           ('/messages.json', MessagesHandler),
                                           ('/search.json', SearchHandler)], debug=True)
     util.run_wsgi_app(application)
