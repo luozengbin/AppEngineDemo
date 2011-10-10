@@ -8,16 +8,6 @@ import settings
 from contextIO2 import ContextIO, Account, Contact, File
 from django.utils import simplejson as json
 
-class FileRevisionsHandler(webapp.RequestHandler):
-    def get(self):
-        current_email = users.get_current_user().email()
-        ctxIO = ContextIO(consumer_key=settings.CONTEXTIO_OAUTH_KEY, consumer_secret=settings.CONTEXTIO_OAUTH_SECRET)
-        accnt = Account(ctxIO, {'id':request.cookies.ctxioid})
-
-        fileId = self.request.get('fileid')
-        response = contextIO.filerevisions(fileId,account=current_email)
-        self.response.out.write(json.dumps(response.get_data()))
-
 class FilesHandler(webapp.RequestHandler):
     def get(self):
         current_email = users.get_current_user().email()
